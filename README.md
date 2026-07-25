@@ -1,19 +1,25 @@
-# Online-BusTicket-booking-Application
 # 🚌 Online Bus Ticket Booking Application
 
-A full-stack **Online Bus Ticket Booking Application** developed using **Java, Spring Boot, Thymeleaf, MySQL, HTML, CSS, JavaScript, and AWS**. The application allows users to search buses, book tickets, verify bookings using OTP, and receive booking confirmation via email.
+A full-stack **Online Bus Ticket Booking Application** developed using **Java, Spring Boot, Thymeleaf, MySQL, HTML, CSS, JavaScript, Bootstrap, and AWS Elastic Beanstalk**. The application enables users to search buses, book tickets, verify bookings using OTP, receive email confirmations, and manage bookings through an intuitive interface.
+
+---
+
+## 🌐 Live Demo
+
+🚀 **Application URL:**  
 http://deepika2.us-east-1.elasticbeanstalk.com/
+
 ---
 
 ## 📌 Features
 
 - 👤 User Registration & Login
-- 🔍 Search Buses by Source, Destination & Date
+- 🔍 Search Buses by Source, Destination & Travel Date
 - 🚌 View Available Bus Details
 - 🎫 Book Bus Tickets
 - 🔐 OTP Verification
 - 📧 Email Ticket Confirmation
-- 📜 View Booking History
+- 📜 User Booking History
 - 👨‍💼 Admin Bus Management
 - 📱 Responsive User Interface
 
@@ -40,7 +46,7 @@ http://deepika2.us-east-1.elasticbeanstalk.com/
 - MySQL
 
 ### Deployment
-- AWS
+- AWS Elastic Beanstalk
 
 ### Tools
 - Spring Tool Suite (STS)
@@ -52,24 +58,11 @@ http://deepika2.us-east-1.elasticbeanstalk.com/
 
 ## 📂 Project Structure
 
-```
+```text
 Online-BusTicket-booking-Application
 │
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   ├── controller
-│   │   │   ├── service
-│   │   │   ├── repository
-│   │   │   ├── entity
-│   │   │   ├── config
-│   │   │   └── TicketManagementApplication.java
-│   │   │
-│   │   ├── resources
-│   │   │   ├── templates
-│   │   │   ├── static
-│   │   │   └── application.properties
-│
+├── screenshots/
+├── src/
 ├── pom.xml
 ├── README.md
 └── .gitignore
@@ -93,13 +86,13 @@ cd Online-BusTicket-booking-Application
 
 ### Configure the Database
 
-Create a MySQL database:
+Create a MySQL database.
 
 ```sql
 CREATE DATABASE ticketbooking;
 ```
 
-Update your `application.properties` with your local database and email configuration.
+Update your `application.properties` with your local MySQL and email credentials.
 
 ### Run the Application
 
@@ -107,7 +100,7 @@ Update your `application.properties` with your local database and email configur
 mvn spring-boot:run
 ```
 
-Open your browser:
+Open your browser and visit:
 
 ```
 http://localhost:8080
@@ -118,23 +111,79 @@ http://localhost:8080
 ## 📋 Application Workflow
 
 1. Register or log in to the application.
-2. Search buses using source, destination, and travel date.
+2. Search buses by source, destination, and travel date.
 3. Select a bus.
 4. Enter passenger details.
-5. Verify the booking using OTP.
+5. Verify booking using OTP.
 6. Confirm the booking.
 7. Receive the ticket confirmation via email.
-8. View booked tickets from your account.
+8. View booking history from the user dashboard.
 
 ---
 
 ## 🗄️ Database
 
-The application uses the following main tables:
+The application uses **MySQL** as the backend database.
+
+### Main Tables
 
 - User
 - Bus
 - Ticket
+
+The database stores:
+
+- User account information
+- Bus details
+- Passenger booking details
+- Ticket records
+
+---
+
+## 📸 Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+---
+
+### Search Buses
+![Search Buses](screenshots/search.png)
+
+---
+
+### Ticket Booking
+![Ticket Booking](screenshots/booking.png)
+
+---
+
+### OTP Verification
+![OTP Verification](screenshots/otp.png)
+
+---
+
+### User Dashboard
+![User Dashboard](screenshots/userdashboard.png)
+
+---
+
+### Add Buses
+![Add Buses](screenshots/addbusses.png)
+
+---
+
+### Manage Buses
+![Manage Buses](screenshots/managebuses.png)
+
+---
+
+### Owner Login
+![Owner Login](screenshots/owner.png)
+
+---
+
+### Owner Dashboard
+![Owner Dashboard](screenshots/ownerdashboard.png)
 
 ---
 
@@ -147,36 +196,6 @@ The application uses the following main tables:
 - 📄 PDF Ticket Download
 - ❌ Ticket Cancellation & Refund
 - ⭐ Bus Ratings & Reviews
-
----
-
-## 📸 Screenshots
-
-Add screenshots of the application here.
-
-Example:
-
-```
-screenshots/
-│── home.png
-│── login.png
-│── search.png
-│── booking.png
-│── confirmation.png
-```
-
-Then display them:
-
-```md
-### Home Page
-![Home](screenshots/home.png)
-
-### Bus Search
-![Search](screenshots/search.png)
-
-### Booking Confirmation
-![Confirmation](screenshots/confirmation.png)
-```
 
 ---
 
