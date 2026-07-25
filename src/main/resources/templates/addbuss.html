@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add Bus</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+.navbar{
+    background:#d84e55;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    text-decoration:underline;
+}
+
+.container{
+    width:550px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.15);
+}
+
+h2{
+    text-align:center;
+    color:#d84e55;
+    margin-bottom:25px;
+}
+
+label{
+    font-weight:bold;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0 18px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#d84e55;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#d84e55;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#b83d44;
+}
+
+.links{
+    text-align:center;
+    margin-top:20px;
+}
+
+.links a{
+    text-decoration:none;
+    color:#d84e55;
+    font-weight:bold;
+    display:block;
+    margin-top:10px;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+        🚌 TicketGo
+    </div>
+
+    <div class="nav-links">
+        <a href="/owner">Dashboard</a>
+        <a href="/buses">Manage Buses</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<div class="container">
+
+<h2>➕ Add New Bus</h2>
+
+<form action="/savebus" method="post">
+
+<label>Bus Name</label>
+<input type="text" name="busName" required>
+
+<label>Source</label>
+<input type="text" name="source" required>
+
+<label>Destination</label>
+<input type="text" name="destination" required>
+
+<label>Journey Date</label>
+<input type="date"
+       id="journeyDate"
+       name="journeyDate"
+       required>
+
+<label>Departure Time</label>
+<input type="text"
+       id="departureTime"
+       name="departureTime"
+       placeholder="02:30 PM"
+       required>
+
+<label>Arrival Time</label>
+<input type="text"
+       id="arrivalTime"
+       name="arrivalTime"
+       placeholder="05:00 PM"
+       required>
+
+<label>Available Seats</label>
+<input type="text"
+       value="40"
+       readonly>
+
+<label>Fare (₹)</label>
+<input type="number"
+       name="fare"
+       min="1"
+       step="0.01"
+       required>
+
+<button type="submit">
+    Save Bus
+</button>
+
+</form>
+
+<div class="links">
+
+<a href="/buses">🚌 View All Buses</a>
+
+<a href="/owner">⬅ Back to Dashboard</a>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+
+// IST Date
+window.onload = function () {
+
+    const now = new Date();
+
+    const istDate = new Intl.DateTimeFormat('en-CA',{
+        timeZone:'Asia/Kolkata'
+    }).format(now);
+
+    document.getElementById("journeyDate").min = istDate;
+    document.getElementById("journeyDate").value = istDate;
+
+};
+
+// Departure Time Picker
+flatpickr("#departureTime",{
+    enableTime:true,
+    noCalendar:true,
+    dateFormat:"h:i K",
+    time_24hr:false
+});
+
+// Arrival Time Picker
+flatpickr("#arrivalTime",{
+    enableTime:true,
+    noCalendar:true,
+    dateFormat:"h:i K",
+    time_24hr:false
+});
+
+</script>
+
+</body>
+</html>

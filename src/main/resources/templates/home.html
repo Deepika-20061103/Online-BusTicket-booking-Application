@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Ticket Management System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#2c3e50,#4ca1af);
+}
+
+/* Navbar */
+
+.navbar{
+    background:#d84e55;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-links a,
+.nav-links span{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    text-decoration:underline;
+}
+
+/* Search Card */
+
+.container{
+    width:420px;
+    background:white;
+    margin:100px auto;
+    padding:35px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+
+h1{
+    color:#2c3e50;
+    margin-bottom:25px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:16px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#d84e55;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#d84e55;
+    color:white;
+    border:none;
+    border-radius:6px;
+    font-size:17px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+button:hover{
+    background:#b63d43;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <div class="logo">
+        🚌 TicketGo
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+
+        <!-- OWNER Dashboard -->
+        <a th:if="${session.user != null and session.user.role == 'OWNER'}"
+           href="/owner">
+            Dashboard
+        </a>
+
+        <!-- USER Dashboard -->
+        <a th:if="${session.user != null and session.user.role != 'OWNER'}"
+           href="/dashboard">
+            Dashboard
+        </a>
+
+        <a href="/bookticket">Book Ticket</a>
+
+        <!-- Before Login -->
+        <a th:if="${session.user == null}"
+           href="/login">
+            👤 Account
+        </a>
+
+        <!-- After Login -->
+        <span th:if="${session.user != null}">
+            👤 <span th:text="${session.user.username}"></span>
+        </span>
+
+        <!-- My Tickets only for normal users -->
+        <a th:if="${session.user != null and session.user.role != 'OWNER'}"
+           href="/tickets">
+            My Tickets
+        </a>
+
+        <a th:if="${session.user != null}"
+           href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+<!-- Search Form -->
+
+<div class="container">
+
+    <h1>Search Buses</h1>
+
+	<form action="/searchBus" method="get">
+
+	    <input type="text"
+	           name="source"
+	           placeholder="Source"
+	           required>
+
+	    <input type="text"
+	           name="destination"
+	           placeholder="Destination"
+	           required>
+
+	    <input type="date"
+	           name="journeyDate"
+	           th:min="${#temporals.format(#temporals.createNow(),'yyyy-MM-dd')}"
+	           required>
+
+	    <button type="submit">
+	        Search Buses
+	    </button>
+
+	</form>
+
+</div>
+
+</body>
+</html>

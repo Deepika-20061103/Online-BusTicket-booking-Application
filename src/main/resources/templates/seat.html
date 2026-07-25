@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Select Seat</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* Navbar */
+
+.navbar{
+    background:#d84e55;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    text-decoration:underline;
+}
+
+/* Container */
+
+.container{
+    width:550px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+}
+
+.container h2{
+    color:#d84e55;
+    margin-bottom:25px;
+}
+
+/* Driver */
+
+.driver{
+    width:90px;
+    padding:10px;
+    border:2px solid #333;
+    border-radius:8px;
+    margin-left:auto;
+    margin-bottom:25px;
+    font-weight:bold;
+    background:#eeeeee;
+}
+
+/* Seat Rows */
+
+.seat-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:18px 0;
+}
+
+/* Seat */
+
+.seat{
+    width:60px;
+    height:55px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:white;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.seat:hover:not(:disabled){
+    background:#218838;
+    transform:scale(1.05);
+}
+
+.seat:disabled{
+    background:#dc3545;
+    cursor:not-allowed;
+}
+
+/* Gap Between Left & Right Seats */
+
+.gap{
+    width:50px;
+}
+
+/* Legend */
+
+.legend{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-top:25px;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.box{
+    width:20px;
+    height:20px;
+    border-radius:4px;
+}
+
+.available{
+    background:#28a745;
+}
+
+.booked{
+    background:#dc3545;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <div class="logo">
+        TicketGo
+    </div>
+
+    <div>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- Seat Selection -->
+
+<div class="container">
+
+    <h2>Select Your Seat</h2>
+
+    <div class="driver">
+        Driver
+    </div>
+
+    <form action="/booking" method="get">
+
+        <input
+            type="hidden"
+            name="busId"
+            th:value="${bus.busId}">
+
+        <!-- Lower Seats -->
+
+        <div class="seat-row">
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="L1"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'L1')}">
+                L1
+            </button>
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="L2"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'L2')}">
+                L2
+            </button>
+
+            <div class="gap"></div>
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="L3"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'L3')}">
+                L3
+            </button>
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="L4"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'L4')}">
+                L4
+            </button>
+
+        </div>
+
+        <!-- Upper Seats -->
+
+        <div class="seat-row">
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="U1"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'U1')}">
+                U1
+            </button>
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="U2"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'U2')}">
+                U2
+            </button>
+
+            <div class="gap"></div>
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="U3"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'U3')}">
+                U3
+            </button>
+
+            <button class="seat"
+                    type="submit"
+                    name="seatNo"
+                    value="U4"
+                    th:disabled="${#lists.contains(bookedSeats.![seatNo],'U4')}">
+                U4
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- Legend -->
+
+    <div class="legend">
+
+        <div class="legend-item">
+            <div class="box available"></div>
+            <span>Available</span>
+        </div>
+
+        <div class="legend-item">
+            <div class="box booked"></div>
+            <span>Booked</span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Verify OTP</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#2c3e50,#4ca1af);
+}
+
+.container{
+    background:#fff;
+    width:380px;
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+h2{
+    color:#2c3e50;
+    margin-bottom:10px;
+}
+
+p{
+    color:#666;
+    margin-bottom:25px;
+    font-size:14px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#4ca1af;
+    box-shadow:0 0 6px rgba(76,161,175,0.4);
+}
+
+.verify-btn{
+    width:100%;
+    padding:12px;
+    background:#4ca1af;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.verify-btn:hover{
+    background:#2c3e50;
+}
+
+.resend-btn{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    background:#ff9800;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.resend-btn:hover{
+    background:#e68900;
+}
+
+.success{
+    color:green;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.error{
+    color:red;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.expired{
+    color:#ff5722;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.timer{
+    margin-top:20px;
+    font-size:15px;
+    color:#2c3e50;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Email OTP Verification</h2>
+
+    <p>
+        Enter the OTP sent to your registered email address.
+    </p>
+
+    <form action="/verifyOtp" method="post">
+
+        <input
+            type="text"
+            name="otp"
+            placeholder="Enter 6-digit OTP"
+            maxlength="6"
+            required>
+
+        <button type="submit" class="verify-btn">
+            Verify OTP
+        </button>
+
+    </form>
+
+    <form action="/resend-otp" method="post">
+
+        <button type="submit" class="resend-btn">
+            Resend OTP
+        </button>
+
+    </form>
+
+    <div class="success" th:if="${param.resent}">
+        ✅ OTP has been resent to your email.
+    </div>
+
+    <div class="error" th:if="${param.error}">
+        ❌ Invalid OTP. Please try again.
+    </div>
+
+    <div class="expired" th:if="${param.expired}">
+        ⏰ OTP has expired. Please resend OTP.
+    </div>
+
+    <div class="timer">
+        OTP expires in <span id="countdown">05:00</span>
+    </div>
+
+</div>
+
+<script>
+
+let time = 300;
+
+function updateTimer(){
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    document.getElementById("countdown").innerHTML =
+        String(minutes).padStart(2,'0') + ":" +
+        String(seconds).padStart(2,'0');
+
+    if(time > 0){
+        time--;
+    }
+}
+
+setInterval(updateTimer,1000);
+
+</script>
+
+</body>
+</html>

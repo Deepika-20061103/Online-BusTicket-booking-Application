@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication</title>
+
+    <style>
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#2c3e50,#4ca1af);
+            font-family:Arial,sans-serif;
+            margin:0;
+        }
+
+        .container{
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            width:400px;
+            text-align:center;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            margin-bottom:25px;
+            color:#2c3e50;
+        }
+
+        .btn{
+            display:block;
+            text-decoration:none;
+            background:#4ca1af;
+            color:white;
+            padding:12px;
+            margin:15px 0;
+            border-radius:8px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#2c3e50;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Do you already have an account?</h2>
+
+	<a th:href="@{/login(busId=${param.busId})}" class="btn">
+	    Yes, Sign In
+	</a>
+
+	<a th:href="@{/signup(busId=${param.busId})}" class="btn">
+	    No, Create New Account
+	</a>
+</div>
+
+</body>
+</html>

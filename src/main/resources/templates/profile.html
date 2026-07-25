@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>My Profile</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* Navbar */
+
+.navbar{
+    background:#d84e55;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.nav-links a:hover{
+    text-decoration:underline;
+}
+
+/* Container */
+
+.container{
+    display:flex;
+    justify-content:center;
+    margin-top:60px;
+}
+
+/* Profile Card */
+
+.profile-card{
+    width:450px;
+    background:white;
+    padding:35px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+}
+
+.profile-card h2{
+    text-align:center;
+    color:#d84e55;
+    margin-bottom:30px;
+}
+
+/* Information */
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 15px;
+    margin-bottom:15px;
+    background:#f8f9fa;
+    border-radius:8px;
+}
+
+.label{
+    font-weight:bold;
+    color:#333;
+}
+
+.value{
+    color:#555;
+}
+
+/* Button */
+
+.btn{
+    display:block;
+    margin-top:25px;
+    text-align:center;
+    text-decoration:none;
+    background:#d84e55;
+    color:white;
+    padding:12px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#b63d43;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <div class="logo">
+        TicketGo
+    </div>
+
+    <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- Profile Card -->
+
+<div class="container">
+
+    <div class="profile-card">
+
+        <h2>👤 My Profile</h2>
+
+        <div class="info-row">
+            <span class="label">Username</span>
+            <span class="value" th:text="${user.username}">Username</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Email</span>
+            <span class="value" th:text="${user.email}">Email</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Phone</span>
+            <span class="value" th:text="${user.phno}">Phone</span>
+        </div>
+
+        <div class="info-row">
+            <span class="label">Role</span>
+            <span class="value" th:text="${user.role}">USER</span>
+        </div>
+
+        <a href="/dashboard" class="btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

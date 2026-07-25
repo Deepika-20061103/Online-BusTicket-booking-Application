@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+<title>My Tickets</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* Navbar */
+
+.navbar{
+    background:#d84e55;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    text-decoration:underline;
+}
+
+/* Heading */
+
+h2{
+    text-align:center;
+    color:#d84e55;
+    margin:30px 0;
+}
+
+/* Table */
+
+.table-container{
+    width:95%;
+    margin:auto;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+th{
+    background:#d84e55;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f8f8f8;
+}
+
+/* Status */
+
+.booked{
+    color:green;
+    font-weight:bold;
+}
+
+.cancelled{
+    color:red;
+    font-weight:bold;
+}
+
+/* Cancel Button */
+
+.cancel-btn{
+    background:red;
+    color:white;
+    text-decoration:none;
+    padding:8px 15px;
+    border-radius:5px;
+}
+
+.cancel-btn:hover{
+    background:darkred;
+}
+
+/* Footer */
+
+.footer{
+    text-align:center;
+    margin:30px;
+}
+
+.footer a{
+    text-decoration:none;
+    background:#d84e55;
+    color:white;
+    padding:12px 20px;
+    border-radius:6px;
+}
+
+.footer a:hover{
+    background:#b63d43;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+        TicketGo
+    </div>
+
+    <div>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/bookticket">Book Ticket</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<h2>My Booked Tickets</h2>
+
+<div class="table-container">
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>Passenger</th>
+    <th>Source</th>
+    <th>Destination</th>
+    <th>Email</th>
+    <th>Journey Date</th>
+    <th>Bus Name</th>
+    <th>Seat No</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+<tr th:each="t : ${tickets}">
+
+    <td th:text="${t.ticketId}"></td>
+    <td th:text="${t.passname}"></td>
+    <td th:text="${t.source}"></td>
+    <td th:text="${t.dest}"></td>
+    <td th:text="${t.email}"></td>
+    <td th:text="${t.journeyDate}"></td>
+    <td th:text="${t.busName}"></td>
+    <td th:text="${t.seatNo}"></td>
+
+    <td>
+
+        <span class="booked"
+              th:if="${t.status=='BOOKED'}">
+            ✅ BOOKED
+        </span>
+
+        <span class="cancelled"
+              th:if="${t.status=='CANCELLED'}">
+            ❌ CANCELLED
+        </span>
+
+    </td>
+
+    <td>
+
+        <a class="cancel-btn"
+           th:if="${t.status=='BOOKED'}"
+           th:href="@{/cancel/{id}(id=${t.ticketId})}"
+           onclick="return confirm('Cancel this ticket?')">
+            Cancel
+        </a>
+
+    </td>
+
+</tr>
+
+</table>
+
+</div>
+
+<div class="footer">
+
+    <a href="/bookticket">
+        ➕ Book New Ticket
+    </a>
+
+</div>
+
+</body>
+</html>

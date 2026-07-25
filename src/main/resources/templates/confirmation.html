@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Booking Successful</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#2c3e50,#4ca1af);
+}
+
+.container{
+    background:#fff;
+    width:400px;
+    padding:40px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+h1{
+    color:#2c3e50;
+    margin-bottom:10px;
+    font-size:26px;
+}
+
+h2{
+    color:#4ca1af;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+p{
+    color:#555;
+    font-size:14px;
+    margin-bottom:25px;
+    line-height:1.5;
+}
+
+.success-icon{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+.btn{
+    display:inline-block;
+    width:100%;
+    padding:12px;
+    background:#4ca1af;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:16px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#2c3e50;
+}
+
+.note{
+    margin-top:15px;
+    font-size:13px;
+    color:#777;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="success-icon">🎉</div>
+
+    <h1>Booking Successful</h1>
+
+    <h2>Your ticket is confirmed</h2>
+
+    <p>
+        Your bus ticket has been successfully booked.
+        <br>
+        A confirmation email has been sent to your registered email address.
+    </p>
+
+    <a href="/dashboard" class="btn">
+        Go to Dashboard
+    </a>
+
+    <div class="note">
+        You can view or cancel your ticket anytime from dashboard.
+    </div>
+
+</div>
+
+</body>
+</html>

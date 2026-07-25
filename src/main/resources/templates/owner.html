@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Owner Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* Navbar */
+
+.navbar{
+    background:#d84e55;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.navbar a:hover{
+    text-decoration:underline;
+}
+
+/* Main Container */
+
+.container{
+    padding:25px;
+}
+
+/* Header */
+
+.header{
+    background:#d84e55;
+    color:white;
+    padding:15px;
+    text-align:center;
+    border-radius:10px;
+    margin-bottom:25px;
+}
+
+/* Statistics */
+
+.stats{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.card{
+    width:220px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    color:#555;
+    margin-bottom:10px;
+}
+
+.card h2{
+    color:#d84e55;
+}
+
+/* Search */
+
+.search-box{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.search-box input{
+    width:300px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.search-box button{
+    padding:10px 18px;
+    border:none;
+    border-radius:5px;
+    background:#d84e55;
+    color:white;
+    cursor:pointer;
+}
+
+.search-box button:hover{
+    background:#b63d43;
+}
+
+/* Table */
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+th{
+    background:#d84e55;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f8f8f8;
+}
+
+/* Status */
+
+.status-booked{
+    color:green;
+    font-weight:bold;
+}
+
+.status-cancelled{
+    color:red;
+    font-weight:bold;
+}
+
+/* Cancel Button */
+
+.cancel-btn{
+    background:red;
+    color:white;
+    padding:8px 15px;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.cancel-btn:hover{
+    background:darkred;
+}
+
+/* Footer Buttons */
+
+.footer-buttons{
+    margin-top:30px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.btn{
+    background:#333;
+    color:white;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <div class="logo">
+        TicketGo
+    </div>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/tickets">My Tickets</a>
+        <a href="/owner">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <!-- Header -->
+
+    <div class="header">
+        <h1>Owner Dashboard</h1>
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats">
+
+        <div class="card">
+            <h3>Total Users</h3>
+            <h2 th:text="${totalUsers}">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Buses</h3>
+            <h2 th:text="${totalBuses}">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Total Tickets</h3>
+            <h2 th:text="${totalTickets}">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Booked Tickets</h3>
+            <h2 th:text="${bookedCount}">0</h2>
+        </div>
+
+        <div class="card">
+            <h3>Cancelled Tickets</h3>
+            <h2 th:text="${cancelledCount}">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <form action="/searchPassenger" method="get">
+
+            <input
+                type="text"
+                name="keyword"
+                placeholder="Search Passenger">
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Ticket Table -->
+
+    <div class="table-container">
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Passenger Name</th>
+                <th>Source</th>
+                <th>Destination</th>
+                <th>Email</th>
+                <th>Journey Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tr th:each="t : ${tickets}">
+
+                <td th:text="${t.ticketId}"></td>
+                <td th:text="${t.passname}"></td>
+                <td th:text="${t.source}"></td>
+                <td th:text="${t.dest}"></td>
+                <td th:text="${t.email}"></td>
+                <td th:text="${t.journeyDate}"></td>
+
+                <td>
+
+                    <span class="status-booked"
+                          th:if="${t.status == 'BOOKED'}">
+                        ✅ BOOKED
+                    </span>
+
+                    <span class="status-cancelled"
+                          th:if="${t.status == 'CANCELLED'}">
+                        ❌ CANCELLED
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <a class="cancel-btn"
+                       th:if="${t.status == 'BOOKED'}"
+                       th:href="@{/owner/cancel/{id}(id=${t.ticketId})}"
+                       onclick="return confirm('Are you sure you want to cancel this ticket?')">
+                        Cancel
+                    </a>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Footer Buttons -->
+
+    <div class="footer-buttons">
+
+        <a href="/addbuss" class="btn">➕ Add Bus</a>
+
+        <a href="/buses" class="btn">🚌 Manage Buses</a>
+
+        <a href="/owner" class="btn">🎫 View Tickets</a>
+
+        <a href="/reports" class="btn">📊 Reports</a>
+
+        <a href="/logout" class="btn">🚪 Logout</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

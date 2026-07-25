@@ -1,0 +1,181 @@
+```html
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Manage Buses</title>
+
+<style>
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:20px;
+}
+
+.navbar{
+    background:#d84e55;
+    color:white;
+    padding:15px 40px;
+    margin:-20px -20px 20px -20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+.container{
+    width:95%;
+    margin:auto;
+}
+
+h2{
+    color:#d84e55;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.15);
+}
+
+th{
+    background:#d84e55;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f5f5f5;
+}
+
+.delete-btn{
+    background:red;
+    color:white;
+    padding:8px 15px;
+    border-radius:5px;
+    text-decoration:none;
+}
+
+.delete-btn:hover{
+    background:darkred;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#333;
+    color:white;
+    padding:10px 20px;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.back-btn:hover{
+    background:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+        TicketGo
+    </div>
+
+    <div>
+        <a href="/owner">Dashboard</a>
+        <a href="/addbus">Add Bus</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+<div class="container">
+
+    <h2>🚌 Manage Buses</h2>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Bus Name</th>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Available Seats</th>
+            <th>Fare</th>
+            <th>Action</th>
+        </tr>
+
+        <tr th:each="b : ${buses}">
+
+            <td th:text="${b.busId}"></td>
+
+            <td th:text="${b.busName}"></td>
+
+            <td th:text="${b.source}"></td>
+
+            <td th:text="${b.destination}"></td>
+
+            <td th:text="${b.departureTime}"></td>
+
+            <td th:text="${b.arrivalTime}"></td>
+
+            <td th:text="${b.availableSeats}"></td>
+
+            <td>
+                ₹<span th:text="${b.fare}"></span>
+            </td>
+
+            <td>
+
+                <a class="delete-btn"
+                   th:href="@{/deletebus/{id}(id=${b.busId})}"
+                   onclick="return confirm('Delete this bus?')">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <a href="/owner" class="back-btn">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+</html>
+```
