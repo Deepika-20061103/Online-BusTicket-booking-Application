@@ -185,7 +185,7 @@ Then display them:
 **Deepika Somisetty**
 
 - GitHub: https://github.com/Deepika-20061103
-- LinkedIn: *(Add your LinkedIn profile URL here)*
+- LinkedIn: https://www.linkedin.com/in/venkata-deepika-devi-somisetty
 
 ---
 
