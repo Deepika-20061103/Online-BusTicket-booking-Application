@@ -2,7 +2,7 @@
 # 🚌 Online Bus Ticket Booking Application
 
 A full-stack **Online Bus Ticket Booking Application** developed using **Java, Spring Boot, Thymeleaf, MySQL, HTML, CSS, JavaScript, and AWS**. The application allows users to search buses, book tickets, verify bookings using OTP, and receive booking confirmation via email.
-
+http://deepika2.us-east-1.elasticbeanstalk.com/
 ---
 
 ## 📌 Features
